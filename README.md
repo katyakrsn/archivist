@@ -8,7 +8,7 @@
 
 ## 📖 Overview
 
-The **Semantic Film Archivist** is a Machine Learning application designed to bridge the gap between traditional metadata search and conceptual understanding in Digital Humanities.
+The **Film Archivist** is a Machine Learning application designed to bridge the gap between traditional metadata search and conceptual understanding in Digital Humanities.
 
 Unlike standard databases that rely on keyword matching (e.g., searching for "war" to find war movies), this tool utilizes **Semantic Embeddings** to understand the *meaning* of a query. Users can describe a plot, an atmospheric tone, or a complex feeling (e.g., movies about the isolation of space travel), and the system retrieves thematically relevant films even if they don't share specific keywords.
 
