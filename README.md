@@ -17,7 +17,7 @@ Unlike standard databases that rely on keyword matching (e.g., searching for "wa
 This project was developed as the final examination for the **Machine Learning for Arts and Humanities** course at the **University of Bologna**.
 
 * **Program:** Master's in Digital Humanities and Digital Knowledge (DHDK)
-* **Academic Year:** 2024/2025
+* **Academic Year:** 2025/2026
 * **Student:** Ekaterina Krasnova
 * **Course Repository:** [UNIBO_MachineLearning by Prof. Giovanni1085](https://github.com/Giovanni1085/UNIBO_MachineLearning)
 
