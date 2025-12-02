@@ -31,7 +31,6 @@ This repository contains the following key files:
 | **`requirements.txt`** | List of all Python dependencies required to run the project (PyTorch, Transformers, Streamlit, etc.). |
 | **`Dataset/movies.csv`** |  Movie Dataset used for the archive. Contains metadata for ~4,800 films. |
 | **`Semantic Film Archivist.docx`** | The official project report detailing methodology, evaluation metrics (Precision@5), and architectural decisions. |
-| *`Movie Recommendation System.py`* | *Draft script.* Included for archival purposes to show the development process from simple recommendations to the final RAG application. |
 
 ## 🚀 Key Features
 
