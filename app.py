@@ -226,27 +226,30 @@ if query:
             else:
                 # 2. GENERATION
                 st.subheader("🤖 Archivist's Analysis")
+                
+                # We focus on the TOP match for the detailed explanation to keep the model focused
+                top_movie = movies_data.iloc[top_results[0][0]]
+            
                 prompt = (
-                    f"User Query: {query}\n\n"
-                    f"Retrieved Context:\n{context_text}\n"
-                    f"Task: Explain why this movie fits the user's query. Do not just summarize the plot. "
-                    f"Connect the specific themes of the movie to the user's request.\n"
-                    f"Analysis:"
+                f"Context: The movie '{top_movie['title']}' has this plot: {str(top_movie['overview'])[:300]}...\n\n"
+                f"Question: Why is '{top_movie['title']}' a good recommendation for someone looking for '{query}'?\n\n"
+                f"Answer:"
                 )
                 
-                with st.spinner("Generating historical analysis..."):
+                with st.spinner("Generating analysis..."):
                     # Ensure response generation only happens ONCE here
                     # FIX: Added min_length=50 to force an explanation
                     # FIX: Added do_sample=True for more natural writing
                     response = generator(
                         prompt, 
                         max_new_tokens=200, 
-                        min_length=50, 
+                        min_length=30, 
                         repetition_penalty=1.2, 
                         do_sample=True,
                         temperature=0.7
                     )
-                    st.info(response[0]['generated_text'], icon="🤖")
+                    clean_response = response[0]['generated_text'].replace(prompt, "").strip()
+                    st.info(clean_response, icon="🤖")
                 
                 # 3. EXPORT FEATURE
                 st.markdown("---")
