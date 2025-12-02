@@ -98,7 +98,7 @@ with st.spinner("Initializing Digital Archive & Neural Models..."):
 
 # --- SIDEBAR: ARCHIVE STATISTICS & INFO ---
 with st.sidebar:
-    st.header("📊 Film Archive")
+    st.header("📊 Archive Statistics")
     st.metric("Total Films", len(movies_data))
     
     # Filter out 0 years for stats
@@ -154,7 +154,7 @@ with tab1:
     st.divider()
     
     st.markdown("### 🔍 Try these sample queries:")
-    st.caption("Click a button to try a ready-made search example:")
+    st.caption("Need inspiration? Click a button below to fill the search box with an example:")
     
     col_q1, col_q2, col_q3 = st.columns(3)
     example_query = ""
@@ -181,12 +181,12 @@ with tab1:
         min_db_year, max_db_year = int(valid_years.min()), int(valid_years.max())
         year_range = col_f2.slider("Filter by Year", min_db_year, max_db_year, (min_db_year, max_db_year))
 
-    if query:
+if query:
         # 1. RETRIEVAL
         query_embedding = retriever.encode(query, convert_to_tensor=True)
         cos_scores = util.cos_sim(query_embedding, embeddings)[0]
         
-        # Apply year filter FIRST
+        # Apply year filter FIRST to candidates to ensure we get top_k valid results
         valid_indices = movies_data[
             (movies_data['year'] >= year_range[0]) & 
             (movies_data['year'] <= year_range[1])
@@ -197,10 +197,13 @@ with tab1:
         else:
             # Create (index, score) pairs for valid films only
             valid_scores = [(i, cos_scores[i].item()) for i in valid_indices]
+            # Sort by score descending
             valid_scores.sort(key=lambda x: x[1], reverse=True)
+            # Take top k
             top_results = valid_scores[:top_k]
             
             retrieved_movies = []
+            context_text = ""
             
             st.subheader("🔎 Retrieved Source Material")
             
@@ -208,32 +211,43 @@ with tab1:
                 movie = movies_data.iloc[idx]
                 confidence = score * 100
                 
+                # Display Card
                 with st.expander(f"{movie['title']} ({movie['year']}) - {confidence:.1f}% Match"):
-                    st.markdown(f"**Director:** {movie['director']}")
-                    st.markdown(f"**Plot:** {movie['overview']}")
+                    st.write(f"**Director:** {movie['director']}")
+                    st.write(f"**Plot:** {movie['overview']}")
                     st.progress(score)
                     st.caption(f"Cosine Similarity Score: {score:.4f}")
                 
                 retrieved_movies.append(movie)
+                context_text += f"* {movie['title']} ({movie['year']}) by {movie['director']}: {str(movie['overview'])[:200]}...\n"
 
             if not retrieved_movies:
-                st.warning(f"No movies found matching the theme '{query}'.")
+                st.warning(f"No movies found matching the theme '{query}' in the selected criteria.")
             else:
                 # 2. GENERATION
                 st.subheader("🤖 Archivist's Analysis")
-                top_movie = retrieved_movies[0]
+                prompt = (
+                    f"User Query: {query}\n\n"
+                    f"Retrieved Context:\n{context_text}\n"
+                    f"Instruction: You are a film scholar. Analyze the retrieved movies and explain exactly how their plots relate to the user's query. "
+                    f"Do not just list titles. Write a short paragraph connecting the themes."
+                )
                 
-                # Use st.markdown to avoid encoding issues
-                st.markdown(f"**🎬 Top Match:** {top_movie['title']} ({int(top_movie['year'])})")
-                st.markdown(f"**🎥 Director:** {top_movie['director']}")
-                st.markdown(f"**📊 Relevance Score:** {top_results[0][1] * 100:.1f}%")
-                st.success(f"**💡 Why this matches:** This film's thematic elements and narrative structure align strongly with your search for *'{query}'*.")
-
-                # Show full context
-                with st.expander("📖 Read Full Plot Summary"):
-                    st.write(top_movie['overview'])
+                with st.spinner("Generating historical analysis..."):
+                    # Ensure response generation only happens ONCE here
+                    # FIX: Added min_length=50 to force an explanation
+                    # FIX: Added do_sample=True for more natural writing
+                    response = generator(
+                        prompt, 
+                        max_new_tokens=200, 
+                        min_length=50, 
+                        repetition_penalty=1.2, 
+                        do_sample=True,
+                        temperature=0.7
+                    )
+                    st.info(response[0]['generated_text'], icon="🤖")
                 
-                # Export feature
+                # 3. EXPORT FEATURE
                 st.markdown("---")
                 export_data = pd.DataFrame([{
                     'Title': m['title'],
