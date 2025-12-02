@@ -1,4 +1,4 @@
-# 🎞️ Semantic Film Archivist
+# 🎞️ Film Archivist
 
 **A Retrieval-Augmented Generation (RAG) system for the film discovery.**
 
