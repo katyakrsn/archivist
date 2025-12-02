@@ -229,12 +229,16 @@ if query:
                 
                 # We focus on the TOP match for the detailed explanation to keep the model focused
                 top_movie = movies_data.iloc[top_results[0][0]]
+                
+                st.markdown(f"### 🎬 {top_movie['title']} ({top_movie['year']})")
+                st.markdown(f"**🎥 Director:** {top_movie['director']}")
+                st.markdown(f"**📊 Relevance Score:** {top_results[0][1] * 100:.1f}%")
             
                 prompt = (
                 f"Movie: {top_movie['title']}\n"
                 f"Plot: {str(top_movie['overview'])[:400]}\n\n"
-                f"User is looking for: {query}\n\n"
-                f"Explain why this movie matches the user's request in one sentence."
+                f"User Query: {query}\n\n"
+                f"Explain why this movie matches the user's query in one clear sentence."
             )
                 
                 with st.spinner("Generating analysis..."):
@@ -243,16 +247,21 @@ if query:
                     # FIX: Added do_sample=True for more natural writing
                     response = generator(
                         prompt, 
-                        max_new_tokens=200, 
-                        min_length=50, 
+                        max_new_tokens=100, 
+                        min_length=20, 
                         repetition_penalty=2.0, 
                         do_sample=True,
                         temperature=0.7,
-                        top_k=50,
-                        top_p=0.95
+                        top_k=50
                     )
+                    
+                    # Clean up response 
                     clean_response = response[0]['generated_text'].replace(prompt, "").strip()
-                    st.info(clean_response, icon="🤖")
+                    st.success(f"**💡 Insight:** {clean_response}")
+
+                    # Show full plot in expander
+                    with st.expander("📖 Read Full Plot Summary"):
+                        st.write(top_movie['overview'])
                 
                 # 3. EXPORT FEATURE
                 st.markdown("---")
