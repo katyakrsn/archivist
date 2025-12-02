@@ -243,7 +243,7 @@ if query:
                     response = generator(
                         prompt, 
                         max_new_tokens=200, 
-                        min_length=90, 
+                        min_length=50, 
                         repetition_penalty=1.2, 
                         do_sample=True,
                         temperature=0.7
