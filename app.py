@@ -231,10 +231,13 @@ if query:
                 top_movie = movies_data.iloc[top_results[0][0]]
             
                 prompt = (
-                f"Context: The movie '{top_movie['title']}' has this plot: {str(top_movie['overview'])[:300]}...\n\n"
-                f"Question: Why is '{top_movie['title']}' a good recommendation for someone looking for '{query}'?\n\n"
-                f"Answer:"
-                )
+                f"Review the following movie plot:\n"
+                f"{str(top_movie['overview'])[:500]}\n\n"
+                f"User Request: {query}\n\n"
+                f"Task: Identify 3 specific details from the plot that match the user's request. "
+                f"Then write one sentence explaining the connection.\n"
+                f"Analysis:"
+            )
                 
                 with st.spinner("Generating analysis..."):
                     # Ensure response generation only happens ONCE here
