@@ -1,6 +1,6 @@
 # 🎞️ Semantic Film Archivist
 
-**A Retrieval-Augmented Generation (RAG) system for intelligent film discovery.**
+**A Retrieval-Augmented Generation (RAG) system for the film discovery.**
 
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://streamlit.io)
 [![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/downloads/release/python-3110/)
