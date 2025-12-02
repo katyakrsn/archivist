@@ -2,7 +2,7 @@
 
 **A Retrieval-Augmented Generation (RAG) system for the film discovery.**
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://streamlit.io)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://archivist-ml.streamlit.app/)
 [![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/downloads/release/python-3110/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=flat&logo=PyTorch&logoColor=white)](https://pytorch.org/)
 
@@ -55,5 +55,5 @@ You can run this project locally on your machine.
 
 **1. Clone the repository**
 ```bash
-git clone [https://github.com/YOUR-USERNAME/semantic-film-archivist.git](https://github.com/YOUR-USERNAME/semantic-film-archivist.git)
-cd semantic-film-archivist
+git clone [https://github.com/katyakrsn/archivist.git](https://github.com/katyakrsn/archivist.git)
+cd archivist
