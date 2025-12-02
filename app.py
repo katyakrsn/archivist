@@ -229,8 +229,9 @@ if query:
                 prompt = (
                     f"User Query: {query}\n\n"
                     f"Retrieved Context:\n{context_text}\n"
-                    f"Instruction: You are a film scholar. Analyze the retrieved movies and explain exactly how their plots relate to the user's query. "
-                    f"Do not just list titles. Write a short paragraph connecting the themes."
+                    f"Task: Explain why this movie fits the user's query. Do not just summarize the plot. "
+                    f"Connect the specific themes of the movie to the user's request.\n"
+                    f"Analysis:"
                 )
                 
                 with st.spinner("Generating historical analysis..."):
