@@ -244,9 +244,11 @@ if query:
                         prompt, 
                         max_new_tokens=200, 
                         min_length=50, 
-                        repetition_penalty=1.2, 
+                        repetition_penalty=2.0, 
                         do_sample=True,
-                        temperature=0.7
+                        temperature=0.7,
+                        top_k=50,
+                        top_p=0.95
                     )
                     clean_response = response[0]['generated_text'].replace(prompt, "").strip()
                     st.info(clean_response, icon="🤖")
