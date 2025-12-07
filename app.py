@@ -715,11 +715,7 @@ def render_evaluation_tab(
         7. **Deep Learning for Recommendations** (Survey)  
            Zhang, S., et al. (2019). *Deep Learning Based Recommender System: A Survey and New Perspectives.* 📄 [Read on arXiv](https://arxiv.org/abs/1707.07435)
         """)
-    
-    st.success("""
-    ✅ **Academic Grounding:** This project is built on peer-reviewed research from top NLP conferences 
-    (EMNLP, NeurIPS) and uses production-grade models from the Hugging Face model hub.
-    """)
+
     
     # ========== LIMITATIONS SECTION ==========
     st.subheader("⚠️ Evaluation Limitations")
