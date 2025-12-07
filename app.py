@@ -355,7 +355,7 @@ def _execute_search(
         | Output Quality | Concise, factual | Elaborate, creative |
         
         **Academic Value:** This demonstrates how RAG's retrieval component 
-        provides value even with minimal generation capabilities—the factual 
+        provides value even with minimal generation capabilities – the factual 
         grounding matters more than prose eloquence for archival discovery.
         """)
 
