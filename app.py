@@ -681,11 +681,6 @@ def render_evaluation_tab(
     
     st.dataframe(comparison_data, use_container_width=True, hide_index=True)
     
-    st.info("""
-    💡 **Key Research Finding:** Karpukhin et al. (2020) demonstrated that dense passage retrieval 
-    using BERT-based embeddings outperforms traditional BM25/TF-IDF approaches by **9-15 percentage points** on open-domain QA tasks. This film archive search applies the same principle to cultural heritage discovery.
-    """)
-    
     # ========== REFERENCES ==========
     st.markdown("### 📚 References")
     
