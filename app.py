@@ -456,8 +456,6 @@ def render_methodology_tab() -> None:
         - Discovers thematic connections automatically
         """)
     
-    st.info("**Real-World Application:** Film scholars can now ask: *'Show me 1950s films reflecting post-war trauma'* and receive semantically relevant results without manual tagging.")
-    
     st.divider()
     
     # Technical Architecture
