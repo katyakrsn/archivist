@@ -552,11 +552,6 @@ def render_evaluation_tab(
     
     st.dataframe(comparison_data, use_container_width=True, hide_index=True)
     
-    st.info("""
-    💡 **Key Research Finding:** Karpukhin et al. (2020) demonstrated that dense passage retrieval 
-    using BERT-based embeddings outperforms traditional BM25/TF-IDF approaches by **9-15 percentage points** on open-domain QA tasks. This film archive search applies the same principle to cultural heritage discovery.
-    """)
-    
     # References
     st.markdown("### 📚 References")
     
@@ -586,11 +581,6 @@ def render_evaluation_tab(
         7. **Deep Learning for Recommendations** (Survey)  
            Zhang, S., et al. (2019). *Deep Learning Based Recommender System: A Survey and New Perspectives.* 📄 [Read on arXiv](https://arxiv.org/abs/1707.07435)
         """)
-    
-    st.success("""
-    ✅ **Academic Grounding:** This project is built on peer-reviewed research from top NLP conferences 
-    (EMNLP, NeurIPS) and uses production-grade models from the Hugging Face model hub.
-    """)
     
     # Limitations
     st.subheader("⚠️ Evaluation Limitations")
