@@ -39,7 +39,7 @@ def load_models() -> Tuple[SentenceTransformer, Any]:
     Returns:
         Tuple[SentenceTransformer, Any]: A tuple containing:
             - retriever: The SentenceTransformer model for semantic encoding.
-            - generator: The HuggingFace text2text-generation pipeline.
+            - generator: The HuggingFace text-generation pipeline.
 
     Raises:
         RuntimeError: If models fail to download or load.
@@ -48,7 +48,7 @@ def load_models() -> Tuple[SentenceTransformer, Any]:
         # 1. Load Retriever (BERT)
         retriever = SentenceTransformer(MODEL_RETRIEVER_NAME)
         # 2. Load Generator (Flan-T5)
-        generator = pipeline('text2text-generation', model=MODEL_GENERATOR_NAME)
+        generator = pipeline('text-generation', model=MODEL_GENERATOR_NAME)
         return retriever, generator
     except Exception as e:
         st.error(f"Error loading models: {e}")
